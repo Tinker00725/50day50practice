@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Heebo:300&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            transition: all 0.2s;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vw;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            width: 100px;
+            padding: 5px;
+            background-color: black;
+            color: white;
+            text-align: center;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .clock {
+            width: 250px;
+            height: 250px;
+            margin: 10px;
+            position: relative;
+        }
+
+        .needle {
+            width: 3px;
+            background-color: black;
+            height: 65px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -100%);
+        }
+
+        .hour_hand {
+            transform-origin: 50% 0%;
+        }
+
+        .minute_hand {
+            height: 100px;
+            transform-origin: 50% 0%;
+        }
+
+        .second_hand {
+            background-color: red;
+            height: 100px;
+            transform-origin: 50% 0%;
+        }
+
+        .center_circle {
+            border-radius: 50%;
+            border: 3px solid red;
+            background-color: black;
+            width: 5px;
+            height: 5px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .show_detail {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .number {
+            font-size: 60px;
+            font-weight: lighter;
+            position: absolute;
+            left: 20px;
+        }
+
+        .APM {
+            margin-left: 15px;
+            font-size: 60px;
+            position: absolute;
+            font-weight: 100;
+            right: 20px;
+            margin-left: 10px;
+
+        }
+
+        .date {
+            color: rgb(184, 181, 181);
+            font-weight: 100;
+            margin-top: 10px;
+            position: absolute;
+            bottom: -50px;
+            z-index: 1;
+        }
+
+        .date span {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            position: absolute;
+            border-radius: 50%;
+            z-index: -5;
+            right: -1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <button>Dark mode</button>
+        <div class="clock">
+            <div class="hour_hand  needle"></div>
+            <div class="minute_hand needle"></div>
+            <div class="second_hand needle"></div>
+            <div class="center_circle"></div>
+        </div>
+        <div class="show_detail">
+            <div class="number">00:00</div><span class="APM">PM</span>
+            <div class="date"></div>
+        </div>
+    </div>
+    <script>
+        let date = document.querySelector('.date');
+        let btn = document.querySelector('button');
+        let body = document.body;
+        let minute_hand = document.querySelector('.minute_hand');
+        let hour_hand = document.querySelector('.hour_hand');
+        let second_hand = document.querySelector('.second_hand');
+        let center_circle = document.querySelector('.center_circle');
+        let number = document.querySelector('.number');
+        let APM = document.querySelector('.APM');
+        let count = 0;
+
+        //实时日期
+        let date1 = new Date();
+        let year = date1.getFullYear();
+        year = year.toString().slice(2,);
+        let month = date1.getMonth();
+        let dayNumber = date1.getDay();
+
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        date.innerHTML = `${days[dayNumber]},${months[month]} ${year}<span></span>`;
+
+        let span = document.querySelector('.date span');
+
+        btn.addEventListener('click', function () {
+            if (count == 0) {
+                body.style.backgroundColor = 'black';
+                hour_hand.style.backgroundColor = 'white';
+                minute_hand.style.backgroundColor = 'white';
+                center_circle.style.backgroundColor = 'white';
+                btn.style.backgroundColor = 'white';
+                btn.style.color = 'black';
+                this.innerHTML = 'Night mode';
+                number.style.color = 'white';
+                span.style.backgroundColor = 'white';
+                APM.style.color = 'white';
+                count = 1;
+            } else {
+                body.style.backgroundColor = 'white';
+                hour_hand.style.backgroundColor = 'black';
+                minute_hand.style.backgroundColor = 'black';
+                center_circle.style.backgroundColor = 'black';
+                btn.style.backgroundColor = 'black';
+                btn.style.color = 'white';
+                this.innerHTML = 'Dark mode';
+                number.style.color = 'black';
+                span.style.backgroundColor = 'black';
+                APM.style.color = 'black';
+                count = 0;
+            }
+        })
+
+        //实时时间
+        setInterval(() => {
+            let now = new Date();
+            let hour = now.getHours();
+            let minute = now.getMinutes();
+            let second = now.getSeconds();
+            APM.innerHTML = (hour >= 12 && hour <= 24) ? 'PM' : 'AM';
+            number.innerHTML = (minute >= 10) ? `${hour}:${minute}` : `${hour}:0${minute}`;
+            if (hour > 12) {
+                hour = hour - 12;
+                hour_hand.style.transform = `rotate(-${180 - (30 * hour)}deg)`;
+            } else {
+                hour_hand.style.transform = `rotate(-${180 - (30 * hour)}deg)`;
+            }
+            if (minute >= 0 && minute <= 30) {
+                minute_hand.style.transform = `rotate(${6 * minute + 180}deg)`;
+            } else {
+                minute_hand.style.transform = `rotate(-${6 * minute}deg)`;
+            }
+            second_hand.style.transform = `rotate(${6 * second + 180}deg)`;
+        }, 1000);
+
+    </script>
+</body>
+
+</html>

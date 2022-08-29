@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            position: absolute;
+            width: 100vw;
+            height: 50vw;
+        }
+
+        div {
+            height: 50vw;
+            width: 300px;
+        }
+
+        .red {
+            background-color: red;
+            position: absolute;
+            left: -300px;
+            transition: all 0.2s ease 0.2s;
+        }
+
+        .red.active {
+            left: -50px;
+            transition: all 0.2s ease 0.2s
+        }
+
+        .black {
+            background-color: black;
+            position: absolute;
+            left: -300px;
+            transition: all 0.2s ease 0.4s
+        }
+
+        .black.active {
+            left: 0px;
+            transition: all 0.2s ease 0s
+        }
+
+        .white {
+            background-color: white;
+            position: absolute;
+            left: -300px;
+            transition: all 0.2s ease 0s;
+        }
+
+        .white.active {
+            left: -100px;
+            transition: all 0.2s ease 0.4s;
+            
+        }
+
+        .cuo {
+            position: absolute;
+            top: 10px;
+            padding: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        button {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <button>点我开始/返回动画</button>
+    <div class="black"></div>
+    <div class="red"></div>
+    <div class="white">
+        <span class="cuo">×</span>
+    </div>
+
+    <script>
+        let button = document.querySelector('button');
+        let divs = document.querySelectorAll('div');
+
+        let count = 0;
+
+        button.addEventListener('click', function () {
+            if (count == 0) {
+                console.log(count)
+                for (let div of divs) {
+                    div.classList.add('active');
+                }
+                count++;
+            }else{
+                console.log(count)
+                for(let div of divs){
+                    div.classList.remove('active');
+                }
+                count--;
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 50vw;
+            background-color: bisque;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        div {
+            border: 1px solid #ccc;
+            width: 500px;
+            height: 400px;
+            text-align: center;
+            display: table;
+            vertical-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <input type="number" max="10" min="1" value="1" class="input">
+    <script>
+        let box = document.querySelector('div');
+        let input = document.querySelector('input');
+        let speed = 300 / input.value;
+        let str = 'We love programming!';
+
+        let index = 1;
+
+        changeText();
+
+        function changeText() {
+            box.innerHTML = str.slice(0, index);
+            index++;
+
+            if (index > str.length) {
+                index = 1;
+            }
+
+            setTimeout(changeText, speed);
+        }
+        input.addEventListener('click', (e) => { speed = 300 / e.target.value })
+    </script>
+</body>
+
+</html>

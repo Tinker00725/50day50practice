@@ -1,0 +1,32 @@
+h1{
+    text-align: center;
+}
+body{
+    overflow-x: hidden;
+}
+.box{
+    width: 400px;
+    margin: 0 auto;
+}
+.card{
+    background-color: pink;
+    width: 400px;
+    height: 200px;
+    margin: 20px 0 ;
+    text-align: center;
+    line-height: 200px;
+    font-size: 50px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: transform 0.5s;
+}
+.card:nth-of-type(even){
+    transform: translateX(-400%);
+}
+/* 选择要变换的子类 */
+.card:nth-of-type(odd){
+    transform: translateX(400%);
+}
+.card.active {
+    transform: translateX(0);
+}

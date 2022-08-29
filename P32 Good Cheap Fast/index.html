@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 50vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        label {
+            display: inline-block;
+            /* 只有设置了inline-block才能设置宽高 */
+            width: 80px;
+            height: 40px;
+            border-radius: 20px;
+            background-color: #ccc;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .circle {
+            border-radius: 50%;
+            width: 37px;
+            height: 37px;
+            background-color: white;
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            bottom: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            animation: movein 0.5s linear forwards;
+        }
+
+        .input{
+            visibility: hidden;
+        }
+
+        .input:checked + label{
+            background-color: purple;
+        }
+
+        .input:checked ~ label .circle{
+            animation: moveout 0.5s linear forwards;
+            /* forward 可以让动画停在终点处 */
+            /* 关键帧想要丝滑，动画曲线必须添加 */
+        }
+
+        @keyframes moveout{
+            0%{
+                transform: translate(0,-50%);
+            }
+            50%{
+                transform: translate(20px,-50%);
+            }
+            100%{
+                transform: translate(37px,-50%);
+            }
+        }
+        @keyframes movein{
+            0%{
+                transform: translate(37px,-50%);
+            }
+            50%{
+                transform: translate(20px,-50%);
+            }
+            100%{
+                transform: translate(0px,-50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="checkbox" class="input" id="good">
+        <label for="good">
+            <!-- label与checkbox绑定id——for -->
+            <!-- 点击label，input状态改变 -->
+            <div class="circle"></div>
+        </label>
+    </div>
+    <div class="container">
+        <input type="checkbox" class="input" id="cheap">
+        <label for="cheap">
+            <div class="circle"></div>
+        </label>
+    </div>
+    <div class="container">
+        <input type="checkbox" class="input" id="fast">
+        <label for="fast">
+            <div class="circle"></div>
+        </label>
+    </div>
+    <script>
+        let good = document.querySelector('#good');
+        let cheap = document.querySelector('#cheap');
+        let fast = document.querySelector('#fast');
+        let inputs = document.querySelectorAll('.input');
+        for(let input of inputs){
+            input.addEventListener('change',function(e){
+                checkSituaion(e.target);
+            })
+        }
+        function checkSituaion(target){
+            if(good.checked && cheap.checked && fast.checked){
+                switch (target){
+                    case fast:
+                        good.checked = false;
+                        break;
+                    case good:
+                        cheap.checked = false;
+                        break;
+                    case cheap:
+                        fast.checked = false;
+                        break;
+                }
+            }}
+    </script>
+</body>
+
+</html>

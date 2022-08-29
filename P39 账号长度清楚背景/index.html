@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: lightblue;
+            height: 50vw;
+            width: 100vw;
+        }
+        .background{
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background:  url('https://images.unsplash.com/photo-1556745757-8d76bdb6984b')
+            no-repeat center center/cover;
+            z-index: -1;
+            filter: blur(15px);
+        }
+        input:focus{
+            outline: none;
+            position: absolute;
+            z-index: 999;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+    <input type="password">
+    <script>
+        let input = document.querySelector('input');
+        let background = document.querySelector('.background');
+        input.addEventListener('input',function(){
+            let length = input.value.length;
+            let num = Math.floor(15-length*2);
+            background.style.filter = `blur(${num}px)`
+        })
+
+    </script>
+</body>
+
+</html>

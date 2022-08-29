@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f7fb
+}
+
+.box {
+    width: 400px;
+    position: relative;
+    height: 70px;
+}
+
+.progress::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: #e0e0e0;
+}
+
+.progress {
+    position: relative;
+    display: flex;
+    height: 5px;
+    width: 400px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress>.change {
+    height: 5px;
+    width: 0;
+    transition: 0.4s ease;
+    background-color: #3498db;
+    position: absolute;
+    left: 0;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    line-height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    border: 3px solid #e0e0e0;
+    z-index: 1;
+    transition: 0.4s ease;
+}
+
+.circle.active {
+    border: 3px solid #3498db;
+}
+
+.btn {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    height: 30px;
+    width: 80px;
+    border: 2px solid #3498db;
+    background-color: #3498db;
+    color: aliceblue;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 25px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+button.active {
+    height: 30px;
+    width: 80px;
+    border: 5px solid #3498db;
+    background-color: #3498db;
+    color: aliceblue;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 25px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.btn>*:disabled {
+    background-color: #e0e0e0;
+    color: white;
+    cursor: not-allowed;
+    border: none;
+}
