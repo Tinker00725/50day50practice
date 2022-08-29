@@ -1,0 +1,51 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vw;
+    width: 100vw;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 472px;
+    height: 250px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+    position: relative;
+}
+.choiceBox{
+    align-self: flex-start;
+}
+.choiceBox li{
+    margin: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.choiceBox li input{
+    margin: 0 10px;
+}
+.submit{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0 0 20px 20px;
+    border: none;
+    background-color: pink;
+    height: 40px;
+    cursor: pointer;
+}
+label{
+    cursor: pointer;
+}

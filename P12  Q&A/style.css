@@ -1,0 +1,67 @@
+body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.question {
+    flex-direction: column;
+    align-items: stretch;
+    display: flex;
+    width: 600px;
+
+}
+
+.question div {
+    position: relative;
+    user-select: none;
+    border: 1px solid #9fa4a8;
+    margin: 10px;
+    padding: 20px 20px 20px 30px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: height 0.2s;
+
+}
+
+.question div span {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    font-size: 20px;
+    position: absolute;
+    right: 20px;
+    top: 17px;
+}
+
+.question div p {
+    font-weight: lighter;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0px;
+    left: 30px;
+    display: none;
+}
+
+.active {
+    height: 100px;
+    background-color: white;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 10%);
+    background: url("D:/VScode/Practice/JavaScript/images/飞机logo.jpg");
+    background-repeat: no-repeat;
+    background-position: -300px -300px;
+}
+
+.change {
+    color: white;
+    background-color: #9fa4a8;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

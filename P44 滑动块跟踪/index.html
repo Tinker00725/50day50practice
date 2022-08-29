@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: antiquewhite;
+            height: 50vw;
+            width: 100vw;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: center;
+            align-items: center;
+            width: 129px;
+            height: 80px;
+            position: relative;
+        }
+
+        input[type='range']::-webkit-slider-runnable-track {
+            /* 用这种方法来对input-tange进行样式设置 */
+            background-color: purple;
+            border-radius: 10px;
+            width: 100% !important;
+            height: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border: 1px solid purple;
+        }
+
+        label {
+            position: absolute;
+            top: 0;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="range" id="range" max="100" min="0">
+        <label for="range">50</label>
+    </div>
+    <script>
+        let range = document.querySelector('#range');
+        let label = document.querySelector('label');
+        range.addEventListener('input', function () {
+            console.log(this.value);
+            label.innerHTML = this.value;
+            label.style.left = `${this.value}%`
+        })
+    </script>
+</body>
+
+</html>

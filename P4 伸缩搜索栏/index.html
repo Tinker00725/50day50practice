@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./font_s0eea2bgvaa/iconfont.css">
+    <style>
+        body{
+            background-color: #7d5fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vw;
+        }
+        div{
+            background-color: white;
+            display: flex;
+            width: 50px;
+            height: 50px;
+            align-items: center;
+            justify-content: space-around;
+            position: absolute;
+            transition: width 0.3s;
+        }
+        input{
+            box-sizing: border-box;
+            outline: none;
+            padding: 5px;
+            border: none;
+            padding: 10px;
+            font-size: large;
+            /* 光标大小随字体 */
+            position: absolute;
+            left: 0;
+            width: 0;
+            height: 50px;
+            transition: width 0.3s;
+        }
+        span{
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <div>
+    <input type="text" placeholder="Search...">
+    <span class="iconfont">&#xe662</span>
+    </div>
+
+    <script>
+        let span = document.querySelector('span');
+        let input = span.previousElementSibling;
+        let div = span.parentElement;
+
+        let count = 0;
+        span.addEventListener('click',function(){
+            if(count==0){
+            input.style.width = 200+'px';
+            div.style.width = 250+'px';
+            // this.style.right = -
+            count++;
+            }else{
+                input.style.width = '0px';
+                div.style.width = 50 +'px';
+                count--;
+            }
+            
+        })
+    </script>
+</body>
+</html>

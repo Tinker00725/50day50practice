@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 50vw;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: lightblue;
+        }
+        .fill{
+            box-sizing: border-box;
+            width: 145px;
+            height: 145px;
+            background-image: url('https://source.unsplash.com/random/150x150');
+        }
+        .empty{
+            box-sizing: border-box;
+            width: 150px;
+            height: 150px;
+            border: 3px solid;
+            background-color: white;
+        }
+        .wait{
+            border: 3px solid white;
+        }
+
+        .hold{
+            border: 3px white dashed;
+            background-color: rgb(82, 81, 81);
+        }
+    </style>
+</head>
+<body>
+    <div class="empty">
+        <div class="fill" draggable="true"></div>
+    </div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+    <div class="empty"></div>
+
+    <script>
+        const fill = document.querySelector('.fill');
+        const emptys = document.querySelectorAll('.empty')
+
+        fill.addEventListener('dragstart',dragStart);
+        fill.addEventListener('dragend',dragEnd);
+
+        for(let empty of emptys){
+            empty.addEventListener('dragenter',dragEnter);
+            empty.addEventListener('dragover',dragOver);
+            empty.addEventListener('dragleave',dragLeave);
+            empty.addEventListener('drop',dragDrop);
+        }//drop事件就是拖动放入事件
+
+        function dragStart(){
+            this.className += ' wait';
+            setTimeout(()=>{this.className = 'invisiable'},0)
+        }//classname 改为invisiable就可隐藏该元素
+        function dragEnd(){
+            this.className = 'fill';
+        }
+        function dragOver(e){
+            e.preventDefault();//这个是阻止移入图片取消
+        }
+        function dragEnter(e){
+            e.preventDefault();
+            this.className+=' hold';
+        }
+        function dragLeave(){
+            this.className = 'empty';
+        }
+        function dragDrop(){
+            this.className = 'empty';
+            this.appendChild(fill);
+        }
+    </script>
+</body>
+</html>

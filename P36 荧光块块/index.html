@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 50vw;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #111;
+        }
+
+        .container {
+            max-width: 400px;
+            background-color: #111;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quares {
+            background-color: #1d1d1d;
+            margin: 2px;
+            width: 16px;
+            height: 16px;
+            
+        }
+
+        .quares:hover {
+            transition-delay: 0s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+    <script>
+        const QUARES = 500;
+        const colors = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71']
+        let container = document.querySelector('.container');
+
+        for(let i=0;i<QUARES;i++){
+            let box = document.createElement('div');
+            box.classList.add('quares');
+
+            box.addEventListener('mouseover',function(){
+                let color = randomColor();
+                this.style.transition = '';
+                this.style.backgroundColor = color;
+                this.style.boxShadow = `0 0 2px ${color},0 0 10px ${color}`
+            })
+
+            box.addEventListener('mouseout',function(){
+                this.style.transition = 'all 2s ease';
+                this.style.backgroundColor = '#1d1d1d';
+                this.style.boxShadow = '0 0 2px #000'
+            })
+
+            container.appendChild(box);
+        }
+
+        function randomColor(){
+            let index = Math.floor(Math.random()*colors.length);
+            return colors[index];
+        }
+    </script>
+</body>
+
+</html>

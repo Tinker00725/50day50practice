@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vw;
+            width: 100vw;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 472px;
+            height: 250px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1);
+            position: relative;
+        }
+
+        .choiceBox {
+            align-self: flex-start;
+        }
+
+        .choiceBox li {
+            margin: 20px 0;
+            width: 100%;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+
+        .choiceBox li input {
+            margin: 0 10px;
+        }
+
+        .submit {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            border-radius: 0 0 20px 20px;
+            border: none;
+            background-color: pink;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        label {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="question">这是问题</h2>
+        <ul class="choiceBox">
+            <li>
+                <input type="radio" name="choice" id="a" class="answer">
+                <label for="a">答案1a</label>
+            </li>
+            <li>
+                <input type="radio" name="choice" id="b" class="answer">
+                <label for="b">答案1b</label>
+            </li>
+            <li>
+                <input type="radio" name="choice" id="c" class="answer">
+                <label for="c">答案1c</label>
+            </li>
+            <li>
+                <input type="radio" name="choice" id="d" class="answer">
+                <label for="d">答案1d</label>
+            </li>
+        </ul>
+
+        <button class="submit">提交</button>
+    </div>
+    <script>
+        let quizBox = [
+            {
+                question: '问题一:请问李斯pp是不是🐖？',
+                a: '是',
+                b: '不是',
+                c: '我不知道',
+                d: '我就是李斯pp',
+                correct: 'a'
+            },
+            {
+                question: '问题二：请问李斯pp的pp有多少瓣？',
+                a: '一瓣',
+                b: '2瓣',
+                c: '1.75瓣',
+                d: 'n瓣',
+                correct: 'd'
+            },
+            {
+                question: '问题三：请问🐖最喜欢吃什么？',
+                a: '粑粑',
+                b: '白菜',
+                c: '猪饲料',
+                d: '好吃哒',
+                correct: 'b'
+            },
+            {
+                question: '问题四：请问console.log(saki==pig)的正确答案是什么',
+                a: 'true',
+                b: '居居琦',
+                c: '这是啥',
+                d: '不知道欸',
+                correct: 'a'
+            },
+        ]
+
+        let choices = document.querySelectorAll('.choiceBox label');
+        let btn = document.querySelector('.submit');
+        let question = document.querySelector('h2');
+        let inputs = document.querySelectorAll('input');
+        let counter = 0;
+        let quizBox_num = 0;
+        let correct;
+        let score = 0;
+        iterlization();
+
+        btn.addEventListener('click', function () {
+            if (quizBox_num < 3) {
+                quizBox_num++;
+                choiseAnswerAndScroce();
+                iterlization();
+                console.log(score);
+                inputs.forEach(item => item.checked = false);
+            } else {
+                choiseAnswerAndScroce();
+                console.log(score);
+                this.parentElement.innerHTML = `
+            <h2>你一共答对了${score}/${quizBox.length}道题</h2>
+        `
+            }
+        })
+
+        function iterlization() {
+            for (let i = 0; i <= quizBox.length + 1; i++) {
+                if (i == 0) {
+                    question.innerHTML = Object.values(quizBox[quizBox_num])[i]
+                } else if (i == 5) {
+                    correct = Object.values(quizBox[quizBox_num])[i]
+                } else {
+                    choices[i - 1].innerHTML = Object.values(quizBox[quizBox_num])[i]
+                }
+            }
+        }
+
+        function choiseAnswerAndScroce() {
+            let answer;
+            for (let input of inputs) {
+                if (input.checked == true) {
+                    answer = input.id;
+                    if (answer === correct) {
+                        score++;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
